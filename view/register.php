@@ -2,8 +2,7 @@
 //imports
 include "../model/conn.php";
 include "../model/create-user.php";
-
-
+session_start();
 if(isset($_POST['submit'])){
 
   //! initialize variable
@@ -41,8 +40,7 @@ if(isset($_POST['submit'])){
       $result = createUser(username,email,$password,$mysqli);    
       if ($result==1) {
         echo '<h1 class="text-success text-center"> User created </h1>';
-        sleep(2);
-        header("Location: login.php");
+
       }else
         echo '<h1 class="text-danger text-center"> DB creation problem</h1>';
     }else{
@@ -103,21 +101,19 @@ function emailValid($email){
 <body class="overflow-x-hidden">
 
 <nav class="border p-3">
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Tasks</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Login</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Register</a>
-  </li>
-</ul>
-</nav>
+        <ul class="nav justify-content-center">
+
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./login.php">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./register.php">Register</a>
+            </li>
+        </ul>
+    </nav>
 
     <div class="row d-flex justify-content-center">
         <img src="https://img.icons8.com/external-filled-outline-geotatah/256/external-register-training-management-system-filled-outline-filled-outline-geotatah.png" class="img-fluid w-25 m-3" alt="...">

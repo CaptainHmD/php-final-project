@@ -3,6 +3,25 @@
   // if(password_verify($password,$password2)){
   //   echo "password match";
   // }
+  session_start();
+if(isset($_SESSION['authenticated'])){
+    $_SESSION['authenticated']===1 ? header("Location: ./index.php"): "";
+    
+}
+  include '../model/conn.php';
+  include '../model/get-data.php';
+
+  if(isset($_GET['user'])){
+    if($_GET['user']=='false'){
+        echo '<h1 class="text-danger text-center"> Username dose`t exists </h1>';
+    } 
+    
+  }
+
+
+  if(isset($_POST['submit'])){
+    getUser($_POST['username'],$_POST['password'],$mysqli);
+}
 
 
 
@@ -26,7 +45,20 @@
 </head>
 
 <body class="overflow-x-hidden">
+<nav class="border p-3">
+        <ul class="nav justify-content-center">
 
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php">Tasks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./login.php">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./register.php">Register</a>
+            </li>
+        </ul>
+    </nav>
     <div class="row d-flex justify-content-center">
         <img src="https://img.icons8.com/external-bearicons-gradient-bearicons/256/external-login-call-to-action-bearicons-gradient-bearicons.png" class="img-fluid w-25 m-3" alt="...">
     </div>
@@ -34,11 +66,11 @@
         <!-- <div class="col-md-12 d-flex justify-content-center"> -->
         <form action="" method="post" class="col-sm-12 d-flex flex-column justify-content-center p-5 border border-light w-75">
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" require>
+                <label for="floatingInput">username</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="d-flex justify-content-center mt-4">
